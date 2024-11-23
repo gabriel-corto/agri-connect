@@ -8,7 +8,7 @@ export const DashHeaderContainer = styled.div`
   button {
     background: ${props => props.theme["green-300"]};
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 0.875rem 1rem;
     border: none;
     border-radius: 8px;
 
@@ -21,6 +21,46 @@ export const DashHeaderContainer = styled.div`
     &:hover {
       cursor: pointer;
       background: ${props => props.theme["green-500"]};
+    }
+  }
+`
+export const SearchFormContainer = styled.form`
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  input {
+    flex: 1;
+    padding: 0.7rem;
+
+    border-radius: 8px;
+    border: 1px solid #374151;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  button {
+    background: ${props => props.theme["yellow-500"]};
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:focus {
+      cursor: pointer;
+      box-shadow: none;
+    }
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
     }
   }
 `

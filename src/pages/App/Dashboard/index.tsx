@@ -1,5 +1,5 @@
-import { CalendarPlus, Truck } from "phosphor-react"
-import { DashboardContainer, DashHeaderContainer } from "./style"
+import { CalendarPlus, MagnifyingGlass, Truck } from "phosphor-react"
+import { DashboardContainer, DashHeaderContainer, SearchFormContainer } from "./style"
 
 export function Dashboard() {
   return (
@@ -15,6 +15,17 @@ export function Dashboard() {
           <span>Agendar Nova Entrega</span>
         </button>
       </DashHeaderContainer>
+
+      <SearchFormContainer>
+        <input 
+          type="text"
+          placeholder="Filtrar" />
+
+        <button type="submit">
+          <MagnifyingGlass size={24} />
+          <span>Buscar</span>
+        </button>
+      </SearchFormContainer>
       
       <table>
         <thead>

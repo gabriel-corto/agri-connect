@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { AsideContainer, NavbarContainer, SidebarContainer, SignOutContainer } from "./style";
-import { House, SignOut, UserCircle } from "phosphor-react";
+import { House, MagnifyingGlass, MapPin, Package, SignOut, Truck, UserCircle } from "phosphor-react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
@@ -25,21 +25,26 @@ export function Header() {
             <span>Home</span>
           </NavLink>
           <NavLink to="/app/form">
-            <House weight="bold" size={32} />
-            <span>Painel</span>
+            <Package weight="bold" size={32} />
+            <span>Resumo</span>
           </NavLink>
           <NavLink to="/app/o">
-            <House weight="bold" size={32} />
-            <span>Painel</span>
+            <Truck weight="bold" size={32} />
+            <span>Rede de Transporte</span>
           </NavLink>
         </NavbarContainer>
       </div>
 
       <AsideContainer>
-        <SignOutContainer onClick={handleAuthenticateUser}>
+        <SignOutContainer onClick={handleAuthenticateUser} title="Terminar Sessão">
           <SignOut size={24}/>
           <span>Sair</span>
         </SignOutContainer>
+
+        <div>
+          <MapPin size={24}/>
+          <span>São Paulo</span>
+        </div>
 
         <div>
           <UserCircle  size={24}/>

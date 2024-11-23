@@ -12,7 +12,7 @@ export const SidebarContainer = styled.header`
 
   display: flex;
   flex-direction: column;
-  gap: 18rem;
+  gap: 13rem;
 
   height: 80vh;
   border-right: 1px solid #a1a1aa;
