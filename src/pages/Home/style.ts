@@ -1,6 +1,7 @@
 import styled from "styled-components";
 export const HeroContainer = styled.div`
-  padding: 2rem 12rem;
+  max-width: 100rem;
+  padding: 2rem 10rem;
 
   display: flex;
   align-items: center;

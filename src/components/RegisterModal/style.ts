@@ -82,4 +82,3 @@ export const InputSeparator = styled.div`
     }
   }
 `
-

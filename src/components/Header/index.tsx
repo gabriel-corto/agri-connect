@@ -1,26 +1,31 @@
 import { CaretCircleRight } from "phosphor-react";
-
 import { HeaderContainer } from "./style";
 import * as Dialog from "@radix-ui/react-dialog";
 import { RegisterModal } from "../RegisterModal";
+import { Toaster } from "sonner";
 
 export function Header() {
+  
   return (
-    <HeaderContainer>
-      <div className="logo">
-        <h1>Agri-<span>Connect</span> </h1>
-      </div>
+    <>
+      <HeaderContainer>
+        <div className="logo">
+          <h1>Agri-<span>Connect</span> </h1>
+        </div>
 
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <button>
-            <CaretCircleRight weight="bold" size={24} />
-            Começar Grátis
-          </button>
-        </Dialog.Trigger>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <button>
+              <CaretCircleRight weight="bold" size={24} />
+              Começar Grátis
+            </button>
+          </Dialog.Trigger>
 
-        <RegisterModal />
-      </Dialog.Root>
-    </HeaderContainer>
+          <RegisterModal />
+        </Dialog.Root>
+      </HeaderContainer>
+      
+      <Toaster position="top-center"  />
+    </>
   )
 }
