@@ -2,6 +2,10 @@ import { NavLink } from "react-router-dom";
 import { HeroContainer } from "./style";
 import { SignIn } from "phosphor-react";
 
+
+import * as Dialog from "@radix-ui/react-dialog"
+import { LoginModal } from "../../components/LoginModal";
+
 export function Home() {
   return (
     <div>
@@ -12,10 +16,16 @@ export function Home() {
             Facilite o <strong>transporte</strong> de seus produtos e reduza o desperdício. Agende suas entregas, otimize rotas e tenha acesso a uma rede de transportadores prontos para levar sua produção mais longe.
           </p>
 
-          <NavLink to="/auth/login">
-            <SignIn size={24} />
-            Faça login
-          </NavLink>
+          <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <NavLink to="#">
+                    <SignIn size={24} />
+                    Faça login
+                </NavLink>
+              </Dialog.Trigger>
+
+              <LoginModal />
+          </Dialog.Root>
         </div>
 
         <img src="/hero-img.png" alt="" />

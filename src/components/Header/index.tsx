@@ -1,8 +1,8 @@
 import { CaretCircleRight } from "phosphor-react";
-import { OnBoardingModal } from "../OnBoardingModal";
 
 import { HeaderContainer } from "./style";
 import * as Dialog from "@radix-ui/react-dialog";
+import { RegisterModal } from "../RegisterModal";
 
 export function Header() {
   return (
@@ -19,7 +19,7 @@ export function Header() {
           </button>
         </Dialog.Trigger>
 
-        <OnBoardingModal />
+        <RegisterModal />
       </Dialog.Root>
     </HeaderContainer>
   )

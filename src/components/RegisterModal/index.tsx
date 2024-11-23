@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Content, Description, InputSeparator, Overlay, Title } from "./style";
 import { CaretCircleRight, X } from "phosphor-react";
 
-export function OnBoardingModal() {
+export function RegisterModal() {
   return (
     <Dialog.Portal>
       <Overlay />
