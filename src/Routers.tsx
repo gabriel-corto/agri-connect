@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Landing } from "./layouts/Landing";
+import { Landing } from "./layouts/LandingLayout";
 import { Home } from "./pages/Home";
 
-import { AuthLayout } from "./layouts/Auth";
-import { Dashboard } from "./pages/Dashboard";
+import { AppLayout } from "./layouts/AppLayout";
+import { Dashboard } from "./pages/App/Dashboard";
 import { Settings } from "./pages/Settings";
 import { ProtectedRoute } from "./Protected";
 
@@ -15,7 +15,7 @@ export function Routers() {
         <Route path="/" element={<Home />} />
       </Route>
 
-      <Route path="/app" element={<AuthLayout/>}>
+      <Route path="/app" element={<AppLayout />}>
         <Route 
           index element={
             <ProtectedRoute>

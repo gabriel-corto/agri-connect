@@ -48,14 +48,20 @@ export const Description = styled(Dialog.Description) `
 `
 export const InputSeparator = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   input {
     width: 100%;
     padding: 1rem;
-    font-size: 0.85rem;
+    font-size: 1rem;
     border-radius: 8px;
     border: 1px solid ${props => props.theme["gray-900"]};
   }
@@ -67,7 +73,7 @@ export const InputSeparator = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: bold;
     justify-content: center;
     gap: 0.5rem;

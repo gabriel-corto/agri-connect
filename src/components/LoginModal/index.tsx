@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { X, SignIn } from "phosphor-react";
+import { X, SignIn, Envelope, Lock } from "phosphor-react";
 import { Content, Description, InputSeparator, Overlay, Title } from "./style";
 
 import * as zod from "zod"
@@ -54,17 +54,29 @@ export function LoginModal() {
 				<Description>
           <form onSubmit={handleSubmit(handleLogin, handleErros)}>
             <InputSeparator>
+             <label htmlFor="password">
+                <Envelope size={20} />
+                <span>Digite seu e-mail</span>
+              </label>
+
               <input 
+                id="email"
                 type="email" 
-                placeholder="Digite seu e-mail"
+                placeholder="E-mail"
                 {...register("email")}
               />
             </InputSeparator>
 
             <InputSeparator>
+              <label htmlFor="password">
+                <Lock size={20} />
+                <span>Digite a sua senha</span>
+              </label>
+
               <input 
+                id="password"
                 type="password" 
-                placeholder="Digite a sua Senha"
+                placeholder="****** ******"
                 {...register("password")} 
               />
             </InputSeparator>

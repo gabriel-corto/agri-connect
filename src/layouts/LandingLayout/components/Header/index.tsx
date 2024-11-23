@@ -1,8 +1,8 @@
 import { CaretCircleRight } from "phosphor-react";
 import { HeaderContainer } from "./style";
 import * as Dialog from "@radix-ui/react-dialog";
-import { RegisterModal } from "../RegisterModal";
 import { Toaster } from "sonner";
+import { RegisterModal } from "../../../../components/RegisterModal";
 
 export function Header() {
   
@@ -10,7 +10,7 @@ export function Header() {
     <>
       <HeaderContainer>
         <div className="logo">
-          <h1>Agri-<span>Connect</span> </h1>
+          <h1>Agri.<span>Connect</span> </h1>
         </div>
 
         <Dialog.Root>
