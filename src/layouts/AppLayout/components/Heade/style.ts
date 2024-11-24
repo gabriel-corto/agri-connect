@@ -20,6 +20,7 @@ export const SidebarContainer = styled.header`
 
 `
 export const NavbarContainer = styled.header`
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

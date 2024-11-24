@@ -7,6 +7,7 @@ import { AppLayout } from "./layouts/AppLayout";
 import { Dashboard } from "./pages/App/Dashboard";
 import { ProtectedRoute } from "./Protected";
 import { Summary } from "./pages/App/Summary";
+import { Transport } from "./pages/App/Transport";
 
 export function Routers() {
   return (
@@ -28,6 +29,14 @@ export function Routers() {
           element={
             <ProtectedRoute>
               <Summary />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="transports" 
+          element={
+            <ProtectedRoute>
+              <Transport />
             </ProtectedRoute>
           } 
         />

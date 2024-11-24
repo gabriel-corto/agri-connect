@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Content, Description, InputSeparator, Overlay, Title } from "./style";
-import {  Package, Popcorn, X } from "phosphor-react";
+import {  Package, Popcorn, Truck, X } from "phosphor-react";
 import { useForm } from "react-hook-form";
 import * as zod from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,8 @@ import { toast } from "sonner";
 
 const deliveryFormDataValidationSchema = zod.object({
   product: zod.string().min(3, "Adcione o nome para o produto"),
-  quantity: zod.string().min(3)
+  quantity: zod.string().min(3),
+  transport: zod.string().min(3),
 });
 
 type deliveryFormData = zod.infer<typeof deliveryFormDataValidationSchema>
@@ -70,6 +71,29 @@ export function DeliveryModal() {
                 placeholder="Ex: 16 kg"
                 {...register("quantity")} 
               />
+            </InputSeparator>
+
+
+            <InputSeparator>
+              <label htmlFor="transport">
+                <Truck size={26} />
+                <span>Selecione uma Transportadora </span>
+              </label>
+
+              <input 
+                list="transport-list"
+                id="transport"
+                type="text" 
+                placeholder="Selecione"
+                {...register("transport")} 
+              />
+
+              <datalist id="transport-list">
+                <option value="MobiTrans">MobiTrans</option>
+                <option value="TransPorto">TransPorto</option>
+                <option value="TransMove">TransMove</option>
+                <option value="TransLogística">TransLogística</option>
+              </datalist>
             </InputSeparator>
             <InputSeparator>
               <button type="submit">

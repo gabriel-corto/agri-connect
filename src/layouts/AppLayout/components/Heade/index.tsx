@@ -28,7 +28,7 @@ export function Header() {
             <Package weight="bold" size={32} />
             <span>Resumo</span>
           </NavLink>
-          <NavLink to="/app/o">
+          <NavLink to="./transports">
             <Truck weight="bold" size={32} />
             <span>Rede de Transporte</span>
           </NavLink>
