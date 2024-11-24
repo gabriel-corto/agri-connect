@@ -9,12 +9,11 @@ import { api } from "../../../../lib/axios";
 import axios from "axios";
 
 const deliveryFormDataValidationSchema = zod.object({
-  farmer: zod.string().min(3),
-  product: zod.string().min(3),
-  quantity: zod.number().min(1),
-  transport: zod.string().min(3),
+  farmer: zod.string().max(30),
+  product: zod.string().max(30),
+  quantity: zod.number().max(30),
+  transport: zod.string().max(20),
   cep: zod.string().max(9),
-  address: zod.string()
 });
 
 type deliveryFormData = zod.infer<typeof deliveryFormDataValidationSchema>
@@ -57,8 +56,6 @@ export function DeliveryModal() {
       status: "pending",
       createdAt: new Date()
     }
-
-    console.log(newDelivery)
     
     const response = await api.post("/deliveries", newDelivery)
     console.log(response) 
