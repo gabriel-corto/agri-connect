@@ -15,7 +15,6 @@
       "processedAt": "2024-11-24T04:19:24.929Z"
     }
   ],
-
   "deliveries": [
     {
       "id": "123456789",
@@ -26,7 +25,18 @@
       "address": "Praça de Sé, Sudeste, São Paulo",
       "transport": "MobiTrans",
       "status": "pending",
-      "scheduleAgo": "2022-07-29T19:36:44.505Z"
+      "createdAt": "2022-07-29T19:36:44.505Z"
+    },
+    {
+      "id": "70920030-a504-4c19-8622-fc8ab49aec6f",
+      "farmer": "Pedro Sousa",
+      "product": "Maça Chinesa",
+      "quantity": 10,
+      "transport": "TransPorto",
+      "cep": "15478-587",
+      "adress": "São Paulo - Praça da Sé, Sudeste",
+      "status": "pending",
+      "createdAt": "2024-11-24T07:12:11.699Z"
     }
   ]
 }

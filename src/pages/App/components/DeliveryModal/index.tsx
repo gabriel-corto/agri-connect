@@ -1,35 +1,91 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Content, Description, InputGrid, InputSeparator, Overlay, Title } from "./style";
-import {  MapPin, Package, Popcorn, Truck, X } from "phosphor-react";
+import { At, Package, Popcorn, Truck, User, X } from "phosphor-react";
 import { useForm } from "react-hook-form";
 import * as zod from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { api } from "../../../../lib/axios";
+import axios from "axios";
 
 const deliveryFormDataValidationSchema = zod.object({
   farmer: zod.string().min(3),
   product: zod.string().min(3),
   quantity: zod.number().min(1),
   transport: zod.string().min(3),
-  cep: zod.string().regex(/^\d{5}-\d{3}$/),
+  cep: zod.string().max(9),
   address: zod.string()
 });
 
 type deliveryFormData = zod.infer<typeof deliveryFormDataValidationSchema>
 
+type DeliveryStatus = "pending" | "accepted" | "delivered"
+
+interface Delivery {
+  id: string 
+  farmer: string 
+  product: string
+  quantity: number 
+  transport: string 
+  cep: string
+  adress: string 
+  status: DeliveryStatus,
+  createdAt: Date
+}
 export function DeliveryModal() {
-   
-  const { register, handleSubmit, formState: { errors } } = useForm<deliveryFormData>({
-    resolver: zodResolver(deliveryFormDataValidationSchema)
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<deliveryFormData>({
+    resolver: zodResolver(deliveryFormDataValidationSchema),
+    defaultValues: {
+      quantity: 0
+    }
   })
+  async function handleNewDelivery(data: deliveryFormData) {
+    const cepRequest = await axios.
+    get(`https://viacep.com.br/ws/${data.cep}/json/`)
+    
+    const { estado, logradouro, regiao } = cepRequest.data 
 
-  function handleNewDelivery() {
+    const newDelivery: Delivery = {
+      id: crypto.randomUUID(),
+      farmer: data.farmer,
+      product: data.product,
+      quantity: data.quantity, 
+      transport: data.transport, 
+      cep: data.cep,
+      adress: `${estado}, ,${logradouro}, ${regiao}`,
+      status: "pending",
+      createdAt: new Date()
+    }
 
+    console.log(newDelivery)
+    
+    const response = await api.post("/deliveries", newDelivery)
+    console.log(response) 
+
+    toast.error("Uma nova entrega foi agendada!", {
+      style: {
+        background: "#bbf7d0",
+        color: "#059669",
+        padding: "1rem",
+      }
+    })
+    reset()
   }
 
   function handleErros() {
     if (Object.keys(errors).length === 0) {
       toast.error("Ops! Verique os dados e tente novamente", {
+        style: {
+          background: "#fee2e2",
+          color: "#dc2626",
+          padding: "1rem",
+        }
+      })
+    }
+
+    if(errors.cep) {
+      toast.error(errors.cep.message, {
         style: {
           background: "#fee2e2",
           color: "#dc2626",
@@ -70,36 +126,21 @@ export function DeliveryModal() {
               </InputGrid>
 
               <InputGrid>
-                <label htmlFor="quantity">
-                  <Package size={20} />
-                  <span>Quantidade (kg) </span>
+                <label htmlFor="farmer">
+                  <User size={20} />
+                  <span>Agricultor</span>
                 </label>
 
                 <input 
-                  id="quantity"
+                  id="farmer"
                   type="text" 
-                  placeholder="Ex: 16 kg"
-                  {...register("quantity", { valueAsNumber: true } )} 
+                  placeholder="Ex: Gabriel"
+                  {...register("farmer")} 
                 />
               </InputGrid>
             </InputSeparator>
 
-
             <InputSeparator>
-              <InputGrid>
-                <label htmlFor="productName">
-                  <Popcorn size={20} />
-                  <span>Seu Produto</span>
-                </label>
-
-                <input 
-                  id="product"
-                  type="text" 
-                  placeholder="Ex: Banana Holandesa"
-                  {...register("product")} 
-                />
-              </InputGrid>
-
               <InputGrid>
                 <label htmlFor="quantity">
                   <Package size={20} />
@@ -111,6 +152,21 @@ export function DeliveryModal() {
                   type="text" 
                   placeholder="Ex: 16 kg"
                   {...register("quantity", { valueAsNumber: true } )} 
+                />
+              </InputGrid>
+
+              <InputGrid>
+                <label htmlFor="cep">
+                  <At size={20} />
+                  <span>CEP</span>
+                </label>
+
+                <input 
+                  id="cep"
+                  type="text" 
+                  maxLength={9}
+                  placeholder="00000-000"
+                  {...register("cep")} 
                 />
               </InputGrid>
             </InputSeparator>
@@ -136,22 +192,6 @@ export function DeliveryModal() {
                   <option value="TransMove">TransMove</option>
                   <option value="TransLogística">TransLogística</option>
                 </datalist>
-              </InputGrid>
-            </InputSeparator>
-
-            <InputSeparator>
-              <InputGrid>
-                <label htmlFor="transport">
-                  <MapPin size={20} />
-                  <span>Endereço </span>
-                </label>
-
-                <input 
-                  id="address"
-                  type="text" 
-                  placeholder=""
-                  {...register("address")} 
-                />
               </InputGrid>
             </InputSeparator>
 
