@@ -111,7 +111,29 @@ export const DashboardContainer = styled.div`
       }
       &:last-child {
         padding-right: 1.5rem;
+       
       } 
     }
+  }
+`
+
+interface StatusProps {
+  variant: "pending" | "accepted" | "delivered"
+}
+
+export const StatusContainer = styled.span<StatusProps>`
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.525rem;
+    height: 0.525rem;
+    border-radius: 30%;
+    background-color: 
+    ${props => 
+      props.variant === "accepted" ? props.theme["gray-900"] :
+      props.variant === "pending" ? props.theme["yellow-500"] :
+      props.variant === "delivered" ? props.theme["green-500"] : ""
+    } ;
+        
   }
 `

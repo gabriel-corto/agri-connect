@@ -24,7 +24,7 @@ export function Header() {
             <House weight="bold" size={32} />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/app/form">
+          <NavLink to="./summary">
             <Package weight="bold" size={32} />
             <span>Resumo</span>
           </NavLink>

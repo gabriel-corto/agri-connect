@@ -5,8 +5,8 @@ import { Home } from "./pages/Home";
 
 import { AppLayout } from "./layouts/AppLayout";
 import { Dashboard } from "./pages/App/Dashboard";
-import { Settings } from "./pages/Settings";
 import { ProtectedRoute } from "./Protected";
+import { Summary } from "./pages/App/Summary";
 
 export function Routers() {
   return (
@@ -24,10 +24,10 @@ export function Routers() {
           } 
         />
         <Route 
-          path="settings" 
+          path="summary" 
           element={
             <ProtectedRoute>
-              <Settings />
+              <Summary />
             </ProtectedRoute>
           } 
         />

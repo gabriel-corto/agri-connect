@@ -1,5 +1,5 @@
 import { CalendarPlus, MagnifyingGlass, Truck } from "phosphor-react"
-import { DashboardContainer, DashHeaderContainer, SearchFormContainer } from "./style"
+import { DashboardContainer, DashHeaderContainer, SearchFormContainer, StatusContainer } from "./style"
 
 export function Dashboard() {
   return (
@@ -44,35 +44,54 @@ export function Dashboard() {
             <td>32 kg</td>
             <td>MobiTrans</td>
             <td>Há 1 Mês</td>
-            <td>Pendente</td>
+            <td>
+              <StatusContainer variant="pending"> Pendente</StatusContainer>
+            </td>
           </tr>
           <tr>
             <td>Tomate Verde</td>
             <td>25 kg</td>
             <td>TransPorto</td>
             <td>Há 3 Mês</td>
-            <td>Concluído</td>
+            <td>
+              <StatusContainer variant="delivered"> Entregue</StatusContainer>
+            </td>
           </tr>
           <tr>
             <td>Maçã Angolanas</td>
             <td>10kg</td>
             <td>TransMove</td>
             <td>Há 1 mês</td>
-            <td>Confirmado</td>
+            <td>
+              <StatusContainer variant="pending"> Pendente</StatusContainer>
+            </td>
           </tr>
           <tr>
             <td>Cebola Rocha</td>
             <td>19kg</td>
             <td>MobiTrans</td>
             <td>Há 3 meses</td>
-            <td>Pendente</td>
+            <td>
+              <StatusContainer variant="accepted"> Confirmado</StatusContainer>
+            </td>
           </tr>
           <tr>
             <td>Ovos</td>
             <td>60 kg</td>
             <td>TransLogística</td>
             <td>Há 1 Mês</td>
-            <td>Confirmado</td>
+            <td>
+              <StatusContainer variant="accepted"> Confirmado</StatusContainer>
+            </td>
+          </tr>
+          <tr>
+            <td>Ovos</td>
+            <td>60 kg</td>
+            <td>TransLogística</td>
+            <td>Há 1 Mês</td>
+            <td>
+              <StatusContainer variant="delivered"> Entregue</StatusContainer>
+            </td>
           </tr>
         </tbody>
       </table>
