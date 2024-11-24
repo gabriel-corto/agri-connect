@@ -1,6 +1,7 @@
 import { CalendarPlus, MagnifyingGlass, Truck } from "phosphor-react"
 import { DashboardContainer, DashHeaderContainer, SearchFormContainer, StatusContainer } from "./style"
-
+import { DeliveryModal } from "../components/DeliveryModal"
+import * as Dialog from "@radix-ui/react-dialog"
 export function Dashboard() {
   return (
     <DashboardContainer>
@@ -10,10 +11,18 @@ export function Dashboard() {
           <span>Entregas</span>
         </h3>
 
-        <button>
-          <CalendarPlus size={24} />
-          <span>Agendar Nova Entrega</span>
-        </button>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <button>
+              <CalendarPlus size={24} />
+              <span>Agendar Nova Entrega</span>
+            </button>
+          </Dialog.Trigger>
+
+          <DeliveryModal />
+        </Dialog.Root>
+
+        
       </DashHeaderContainer>
 
       <SearchFormContainer>
