@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "swdqwe1",
+      "name": "Eduardo Santos",
+      "email": "edu.santos@email.com",
+      "password": "edu123456",
+      "processedAt": "2022-07-29T19:36:44.505Z"
+    },
+    {
+      "id": "44ba8fbf-66cc-4c62-9dd6-fbebdc4a6d14",
+      "name": "Gabriel Francisco ",
+      "email": "gabriel@gmail.com",
+      "password": "123456",
+      "processedAt": "2024-11-24T04:19:24.929Z"
+    }
+  ]
+}

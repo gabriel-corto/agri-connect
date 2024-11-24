@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog"
+import { toast } from "sonner";
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -89,3 +90,6 @@ export const InputSeparator = styled.div`
   }
 `
 
+export const ToastError = styled(toast)`
+
+`

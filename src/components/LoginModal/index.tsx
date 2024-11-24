@@ -1,11 +1,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, SignIn, Envelope, Lock } from "phosphor-react";
 import { Content, Description, InputSeparator, Overlay, Title } from "./style";
-
 import * as zod from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { api } from "../../lib/axios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginFormDataValidationSchema = zod.object({
   email: zod.string().email("E-mail inválido"),
@@ -15,7 +18,25 @@ const LoginFormDataValidationSchema = zod.object({
 
 type LoginFormData = zod.infer<typeof LoginFormDataValidationSchema>
 
+
+
 export function LoginModal() {
+
+  const navigation = useNavigate()
+  const { authenticateUser } = useContext(AuthContext)
+  
+  const [ users, setUsers ] = useState<LoginFormData[]>([])
+
+  async function loadAPI () {
+    const response = await api.get("/users")
+    const apiData = response.data 
+    
+    setUsers(apiData)
+  }
+
+  useEffect(() => {
+    loadAPI()
+  }, [])
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(LoginFormDataValidationSchema),
@@ -25,17 +46,46 @@ export function LoginModal() {
     }
   })
 
-  function handleLogin(data: LoginFormData) {
-    console.log(data)
+  async function handleLogin(data: LoginFormData) {
+    const authUser = users.find(user => {
+      return user.email === data.email
+    }) 
+    
+    if(authUser && authUser.password === data.password) {
+      toast.error("Login feito com Sucesso!", {
+        style: {
+          background: "#bbf7d0",
+          color: "#059669",
+          padding: "1rem",
+        }
+      })
+
+      setTimeout(() => {
+        authenticateUser()
+       navigation("/app")
+      }, 2000)
+    } else {
+      toast.error("Ops! Usuário não encontrado!", {
+        style: {
+          background: "#fee2e2",
+          color: "#dc2626",
+          padding: "1rem",
+        }
+      })
+    }
+
   }
 
   function handleErros() {
-    if (Object.keys(errors).length === 0) {
-      toast.error("Dados de Login Inválidos");
-    } else {
-      if (errors.email) toast.error(errors.email.message);
-      if (errors.password) toast.error(errors.password.message);
-    }
+    if (errors.email || errors.password) {
+      toast.error("Ops! Dados inválidos.", {
+        style: {
+          background: "#fee2e2",
+          color: "#dc2626",
+          padding: "1rem",
+        }
+      })
+    } 
   }
 
   return (

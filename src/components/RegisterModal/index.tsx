@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../lib/axios";
 
 const registerFormDataValidationSchema = zod.object({
   name: zod.string().min(3, "Preencha o Nome").max(50, "Nome muito longo"),
@@ -17,6 +18,13 @@ const registerFormDataValidationSchema = zod.object({
 
 type RegisterFormData = zod.infer<typeof registerFormDataValidationSchema>
 
+interface Farmers {
+  id: string 
+  name: string 
+  email: string 
+  password: string 
+  processedAt: Date
+}
 export function RegisterModal() {
 
   const navigation = useNavigate()
@@ -31,19 +39,68 @@ export function RegisterModal() {
     }
   })
 
+  async function handleRegister(data: RegisterFormData) {
+    toast.error("Conta criada com sucesso!", {
+      style: {
+        background: "#bbf7d0",
+        color: "#059669",
+        padding: "1rem",
+      }
+    })
 
-  function handleRegister(data: RegisterFormData) { 
-    authenticateUser()
-    navigation("/app")
+    setTimeout(() => {
+      authenticateUser()
+      navigation("/app")
+    }, 3000) 
+
+    const newFarmer: Farmers = {
+      id: crypto.randomUUID(),
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      processedAt: new Date(),
+    }
+
+    const response = await api.post("/users", newFarmer)
   }
 
   function handleErros() {
     if (Object.keys(errors).length === 0) {
-      toast.error("Por favor, preencha todos os campos.");
+      toast.error("Preencha os campos vázios!", {
+        style: {
+          background: "#fee2e2",
+          color: "#dc2626",
+          padding: "1rem",
+        }
+      })
     } else {
-      if (errors.name) toast.error(errors.name.message);
-      if (errors.email) toast.error(errors.email.message);
-      if (errors.password) toast.error(errors.password.message);
+      if (errors.name) {
+        toast.error("Campo nome obrigatório!", {
+          style: {
+            background: "#fee2e2",
+            color: "#dc2626",
+            padding: "1rem",
+          }
+        })
+      };
+      if (errors.email) {
+        toast.error("Endereço de e-mail inválido!", {
+          style: {
+            background: "#fee2e2",
+            color: "#dc2626",
+            padding: "1rem",
+          }
+        })
+      };
+      if (errors.password) {
+        toast.error("No mínimo 6 caracteres pra senha!", {
+          style: {
+            background: "#fee2e2",
+            color: "#dc2626",
+            padding: "1rem",
+          }
+        })
+      };
     }
   }
 
