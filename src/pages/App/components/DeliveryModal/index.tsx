@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { api } from "../../../../lib/axios";
 import axios from "axios";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 const deliveryFormDataValidationSchema = zod.object({
   farmer: zod.string().max(30),
@@ -31,15 +32,45 @@ interface Delivery {
   status: DeliveryStatus,
   createdAt: Date
 }
-export function DeliveryModal() {
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<deliveryFormData>({
-    resolver: zodResolver(deliveryFormDataValidationSchema),
-    defaultValues: {
-      quantity: 0
-    }
-  })
-  async function handleNewDelivery(data: deliveryFormData) {
+
+interface ScheduleContextProps {
+  schedules: Delivery[]
+  createNewSchedule: (data: deliveryFormData) => void
+  fetchSchedules: () => void  
+  filterSchedules: (query: string) => void 
+}
+export const ScheduleContext = createContext({} as ScheduleContextProps)
+
+export function ScheduleProvider({ children }: { children: ReactNode}) {
+
+  const [ schedules, setSchedule ] = useState<Delivery[]>([])
+
+  async function fetchSchedules() {
+    const request = await api.get("/deliveries")
+    const fetchData = request.data
+      
+    setSchedule(fetchData)
+  }
+  
+  useEffect(() => {
+    fetchSchedules()
+  }, [])
+
+  function filterSchedules(query: string) {
+    schedules.filter(schedule => {
+      if (schedule.product !== query) {
+        setSchedule([schedule])
+        return true;
+      } else {
+        return schedule  
+      }
+    })
+  }
+  
+  
+
+  async function createNewSchedule(data: deliveryFormData) {
     const cepRequest = await axios.
     get(`https://viacep.com.br/ws/${data.cep}/json/`)
     
@@ -58,7 +89,6 @@ export function DeliveryModal() {
     }
     
     const response = await api.post("/deliveries", newDelivery)
-    console.log(response) 
 
     toast.error("Uma nova entrega foi agendada!", {
       style: {
@@ -67,6 +97,31 @@ export function DeliveryModal() {
         padding: "1rem",
       }
     })
+  }
+  return (
+    <ScheduleContext.Provider value={{
+      schedules,
+      createNewSchedule,
+      fetchSchedules,
+      filterSchedules
+    }}>
+      {children}
+    </ScheduleContext.Provider>
+  )
+}
+
+export function DeliveryModal() {
+
+  const { createNewSchedule } = useContext(ScheduleContext)
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<deliveryFormData>({
+    resolver: zodResolver(deliveryFormDataValidationSchema),
+    defaultValues: {
+      quantity: 0
+    }
+  })
+  async function handleNewDelivery(data: deliveryFormData) {
+    createNewSchedule(data)
     reset()
   }
 
