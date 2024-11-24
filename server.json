@@ -14,5 +14,19 @@
       "password": "123456",
       "processedAt": "2024-11-24T04:19:24.929Z"
     }
+  ],
+
+  "deliveries": [
+    {
+      "id": "123456789",
+      "farmer": "Marianna",
+      "product": "Banana Holandesa",
+      "quantity": 32,
+      "cep": "55555-999",
+      "address": "Praça de Sé, Sudeste, São Paulo",
+      "transport": "MobiTrans",
+      "status": "pending",
+      "scheduleAgo": "2022-07-29T19:36:44.505Z"
+    }
   ]
 }

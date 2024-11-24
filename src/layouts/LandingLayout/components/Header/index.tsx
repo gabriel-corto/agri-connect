@@ -1,7 +1,6 @@
 import { CaretCircleRight } from "phosphor-react";
 import { HeaderContainer } from "./style";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Toaster } from "sonner";
 import { RegisterModal } from "../../../../components/RegisterModal";
 
 export function Header() {
@@ -25,7 +24,6 @@ export function Header() {
         </Dialog.Root>
       </HeaderContainer>
       
-      <Toaster position="top-center"  />
     </>
   )
 }

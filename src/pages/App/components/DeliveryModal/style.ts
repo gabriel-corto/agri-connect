@@ -48,22 +48,26 @@ export const Description = styled(Dialog.Description) `
 `
 export const InputSeparator = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem;
 
   label {
     display: flex;
     align-items: center;
+    font-size: 0.95rem;
     gap: 0.5rem;
   }
 
   input {
     width: 100%;
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border-radius: 8px;
     border: 1px solid ${props => props.theme["gray-900"]};
+  }
+
+  #address, #transport{
+    flex: 1;
   }
 
   button {
@@ -73,7 +77,7 @@ export const InputSeparator = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: bold;
     justify-content: center;
     gap: 0.5rem;
@@ -87,4 +91,8 @@ export const InputSeparator = styled.div`
       background: ${props => props.theme["green-500"]};
     }
   }
+`
+export const InputGrid = styled.div`
+  display: flex;
+  flex-direction: column;
 `

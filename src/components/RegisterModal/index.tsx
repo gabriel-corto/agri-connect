@@ -66,42 +66,14 @@ export function RegisterModal() {
 
   function handleErros() {
     if (Object.keys(errors).length === 0) {
-      toast.error("Preencha os campos vázios!", {
+      toast.error("Ops! Verifique os dados digitados", {
         style: {
           background: "#fee2e2",
           color: "#dc2626",
           padding: "1rem",
         }
       })
-    } else {
-      if (errors.name) {
-        toast.error("Campo nome obrigatório!", {
-          style: {
-            background: "#fee2e2",
-            color: "#dc2626",
-            padding: "1rem",
-          }
-        })
-      };
-      if (errors.email) {
-        toast.error("Endereço de e-mail inválido!", {
-          style: {
-            background: "#fee2e2",
-            color: "#dc2626",
-            padding: "1rem",
-          }
-        })
-      };
-      if (errors.password) {
-        toast.error("No mínimo 6 caracteres pra senha!", {
-          style: {
-            background: "#fee2e2",
-            color: "#dc2626",
-            padding: "1rem",
-          }
-        })
-      };
-    }
+    } 
   }
 
   return (

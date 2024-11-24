@@ -5,6 +5,7 @@ import { defaultTheme } from "./theme/default";
 import { BrowserRouter } from "react-router-dom";
 import { Routers } from "./Routers";
 import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "sonner";
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -13,6 +14,8 @@ export function App() {
           <Routers />
         </BrowserRouter>
       </AuthProvider>
+
+      <Toaster position="top-right"  />
       <GlobalStyle />
     </ThemeProvider>
   )
